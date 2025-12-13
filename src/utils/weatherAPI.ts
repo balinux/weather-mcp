@@ -40,7 +40,7 @@ export async function getRealWeather(city: string): Promise<WeatherData> {
             );
         }
 
-        const data: RawWeatherApiResponse = await response.json();
+        const data: RawWeatherApiResponse = (await response.json()) as RawWeatherApiResponse;
 
         return {
             city: data.name,
