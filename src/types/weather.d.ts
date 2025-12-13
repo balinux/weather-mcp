@@ -88,7 +88,6 @@ export interface RawWeatherApiResponse {
  * Interface representing simplified weather data for the MCP tool
  */
 export interface WeatherData {
-    isFake: string;
     city: string;
     temperature: string;
     humidity: string;

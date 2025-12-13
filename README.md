@@ -71,45 +71,11 @@ Untuk mengimplementasikan server MCP ini di Gemini CLI, tambahkan konfigurasi be
   "theme": "GitHub",
   "selectedAuthType": "oauth-personal",
   "mcpServers": {
-    "filesystem": {
-      "type": "local",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/balinux/workspace"
-      ],
-      "environment": {
-        "API_TOKEN": "secret123",
-        "DEBUG": "true"
-      },
-      "allowedTools": [
-        "read_file",
-        "write_file"
-      ],
-      "excludedTools": [
-        "delete_file"
-      ]
-    },
-    "demo-gemini": {
-      "command": "npx",
-      "args": [
-        "ts-node",
-        "/home/balinux/Documents/code/AI-LLM-dev/mcp/simple-mcp/src/server.ts"
-      ]
-    },
-    "handsome-dev": {
-      "command": "npx",
-      "args": [
-        "ts-node",
-        "/home/balinux/Documents/code/AI-LLM-dev/mcp/simple-mcp/src/handsome-dev/server.ts"
-      ]
-    },
     "weather": {
       "command": "bun",
-      "args": ["run", "/home/balinux/Documents/code/AI-LLM-dev/mcp/weather-mcp/dist/index.js"],
+      "args": ["run", "/home/balinux/Documents/code/AI-LLM-dev/mcp/weather-mcp/dist/index.js"], // absolute path
       "env": {
-        "OPENWEATHER_API_KEY": "28ea9963ad1cc250642c93f252e9cd22"
+        "OPENWEATHER_API_KEY": "key"
       }
     }
   }

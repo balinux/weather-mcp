@@ -16,7 +16,6 @@ export async function getRealWeather(city: string): Promise<WeatherData> {
 
         // Return simulated data based on city name
         return {
-            isFake: !API_KEY ? "fake" : "real",
             city: city,
             temperature: `${Math.floor(Math.random() * 40 - 5)}°C`,
             humidity: `${Math.floor(Math.random() * 40 + 40)}%`,
@@ -44,7 +43,6 @@ export async function getRealWeather(city: string): Promise<WeatherData> {
         const data: RawWeatherApiResponse = await response.json();
 
         return {
-            isFake: "Real",
             city: data.name,
             temperature: `${Math.round(data.main.temp)}°C`,
             humidity: `${data.main.humidity}%`,

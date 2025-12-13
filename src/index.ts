@@ -61,7 +61,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             // Format response yang lebih readable
             const formattedResponse = `🌤️ Weather in ${weatherData.city}:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-fake or not: ${weatherData.isFake}
 🌡️  Temperature: ${weatherData.temperature}
 💧 Humidity: ${weatherData.humidity}
 💨 Wind Speed: ${weatherData.windSpeed}
