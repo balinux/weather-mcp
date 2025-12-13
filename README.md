@@ -62,6 +62,67 @@ Untuk mengintegrasikan MCP ini dengan Qwen CLI atau sistem lain yang mendukung M
 2. Konfigurasi client MCP untuk menjalankan perintah: `bun run dist/index.js` atau `node dist/index.js`
 3. MCP akan berkomunikasi melalui STDIO sesuai spesifikasi Model Context Protocol
 
+## Implementasi di Gemini CLI
+
+Untuk mengimplementasikan server MCP ini di Gemini CLI, tambahkan konfigurasi berikut ke file konfigurasi MCP Anda:
+
+```json
+{
+  "theme": "GitHub",
+  "selectedAuthType": "oauth-personal",
+  "mcpServers": {
+    "filesystem": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/balinux/workspace"
+      ],
+      "environment": {
+        "API_TOKEN": "secret123",
+        "DEBUG": "true"
+      },
+      "allowedTools": [
+        "read_file",
+        "write_file"
+      ],
+      "excludedTools": [
+        "delete_file"
+      ]
+    },
+    "demo-gemini": {
+      "command": "npx",
+      "args": [
+        "ts-node",
+        "/home/balinux/Documents/code/AI-LLM-dev/mcp/simple-mcp/src/server.ts"
+      ]
+    },
+    "handsome-dev": {
+      "command": "npx",
+      "args": [
+        "ts-node",
+        "/home/balinux/Documents/code/AI-LLM-dev/mcp/simple-mcp/src/handsome-dev/server.ts"
+      ]
+    },
+    "weather": {
+      "command": "bun",
+      "args": ["run", "/home/balinux/Documents/code/AI-LLM-dev/mcp/weather-mcp/dist/index.js"],
+      "env": {
+        "OPENWEATHER_API_KEY": "28ea9963ad1cc250642c93f252e9cd22"
+      }
+    }
+  }
+}
+```
+
+Pastikan untuk:
+
+1. Mengganti path `/home/balinux/Documents/code/AI-LLM-dev/mcp/weather-mcp/dist/index.js` dengan path absolut ke file hasil build Anda
+2. Mengganti nilai `OPENWEATHER_API_KEY` dengan API key OpenWeather yang valid
+3. Memastikan bahwa `bun` telah terinstal di sistem Anda
+4. Menjalankan `bun run build` sebelum menggunakan server MCP untuk memastikan file `dist/index.js` tersedia
+
 ## Struktur Project
 
 - `src/index.ts` - Server MCP utama

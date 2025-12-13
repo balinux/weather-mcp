@@ -16,10 +16,11 @@ export async function getRealWeather(city: string): Promise<WeatherData> {
 
         // Return simulated data based on city name
         return {
+            isFake: !API_KEY ? "fake" : "real",
             city: city,
-            temperature: `${Math.floor(Math.random() * 40 - 5)}°C`, // Random temp between -5°C to 39°C
-            humidity: `${Math.floor(Math.random() * 40 + 40)}%`,   // Random humidity between 40% to 79%
-            windSpeed: `${Math.floor(Math.random() * 20 + 5)}m/s`, // Random windspeed between 5m/s to 24m/s
+            temperature: `${Math.floor(Math.random() * 40 - 5)}°C`,
+            humidity: `${Math.floor(Math.random() * 40 + 40)}%`,
+            windSpeed: `${Math.floor(Math.random() * 20 + 5)}m/s`,
             description: ['clear sky', 'few clouds', 'scattered clouds', 'broken clouds', 'shower rain', 'rain', 'thunderstorm', 'snow', 'mist'][Math.floor(Math.random() * 9)],
             weatherIcon: '01d',
             pressure: `${Math.floor(Math.random() * 50 + 1000)} hPa`,
@@ -28,15 +29,22 @@ export async function getRealWeather(city: string): Promise<WeatherData> {
     }
 
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`);
+        // PERBAIKAN: Ganti backtick dengan parentheses
+        const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+        );
 
         if (!response.ok) {
-            throw new Error(`Weather API error: ${response.status} ${response.statusText}`);
+            // PERBAIKAN: Ganti backtick dengan parentheses
+            throw new Error(
+                `Weather API error: ${response.status} ${response.statusText}`
+            );
         }
 
         const data: RawWeatherApiResponse = await response.json();
 
         return {
+            isFake: "Real",
             city: data.name,
             temperature: `${Math.round(data.main.temp)}°C`,
             humidity: `${data.main.humidity}%`,
