@@ -44,6 +44,30 @@ Weather result: {
 }
 ```
 
+## Menjalankan Server dan Client MCP
+
+### Menjalankan Server MCP
+Untuk menjalankan server MCP secara langsung:
+```bash
+bun run src/index.ts
+```
+
+### Menjalankan Client untuk Testing
+Untuk menjalankan client MCP (untuk testing koneksi):
+```bash
+bun run src/clients/weather.ts
+```
+
+Catatan: Pastikan server MCP sedang berjalan sebelum menjalankan client.
+
+### Menjalankan Server untuk Pengujian (MCP Inspector)
+Cara terbaik untuk memastikan server berjalan benar tanpa perlu client kustom adalah menggunakan MCP Inspector. Ini adalah alat debug resmi yang menyediakan antarmuka web. 
+```bash
+npx @modelcontextprotocol/inspector node dist/server.js
+#atau dengan bun
+bunx @modelcontextprotocol/inspector bun src/index.ts
+```
+
 ## Konfigurasi API
 
 Untuk menggunakan API cuaca sebenarnya, set environment variable berikut:
@@ -94,4 +118,5 @@ Pastikan untuk:
 - `src/index.ts` - Server MCP utama
 - `src/tools/weather.ts` - Definisi alat cuaca dan skema Zod
 - `src/utils/weatherAPI.ts` - Logika pengambilan data cuaca dari API
+- `src/clients/weather.ts` - Contoh client MCP untuk testing
 - `dist/index.js` - Hasil build untuk deployment
